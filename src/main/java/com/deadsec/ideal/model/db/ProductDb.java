@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class ProductDb {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,11 +24,11 @@ public class Product {
 	private Timestamp updated_at;
 	private Timestamp deleted_at;
 	
-	public Product() {
+	public ProductDb() {
 		
 	}
 	
-	public Product(String code, String product_name, String cas_number, String description) {
+	public ProductDb(String code, String product_name, String cas_number, String description) {
 		super();
 		this.code = code;
 		this.product_name = product_name;
@@ -36,7 +36,7 @@ public class Product {
 		this.description = description;
 	}
 
-	public Product(int id, String code, String product_name, String cas_number, String description) {
+	public ProductDb(int id, String code, String product_name, String cas_number, String description) {
 		super();
 		this.id = id;
 		this.code = code;

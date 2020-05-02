@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.deadsec.ideal.model.db.Packing;
+import com.deadsec.ideal.model.db.Company;
 
 @Repository
-public interface PackingRepository extends JpaRepository<Packing, Integer>{
+public interface CompanyRepository extends JpaRepository<Company, Integer>{
 
-	@Query(value = "SELECT pk.id FROM packing pk WHERE pk.packing_size = :size",
+	@Query(value = "SELECT c.id FROM company c WHERE c.company_name = :name",
 	nativeQuery = true)
-	int findPackingIdBySize(@Param("size") String size);
+	int findCompanyIdByName(@Param("name") String name);
 }
