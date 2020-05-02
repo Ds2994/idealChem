@@ -1,5 +1,7 @@
 package com.deadsec.ideal.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +13,13 @@ import com.deadsec.ideal.model.data.Product;
 import com.deadsec.ideal.service.ProductService;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/{code}")
+	@GetMapping("/code/{code}")
 	public ResponseEntity<Product> getProductByCode(@PathVariable("code") String code) {
 		
 		Product product = productService.getProductByCode(code);
@@ -26,6 +28,18 @@ public class ProductController {
 			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok(product);
+		}
+	}
+	
+	@GetMapping("/name/{name}")
+	public  ResponseEntity<List<Product>> getProductsByName(@PathVariable("name") String name) {
+		
+		List<Product> products = productService.getProductsByName(name);
+		
+		if(products == null || products.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(products);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.deadsec.ideal.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,15 @@ public class ProductServiceImpl implements ProductService{
 		Product product = ProductPopulator.populateProductFromDB(dbData);
 		
 		return product;
+	}
+
+	@Override
+	public List<Product> getProductsByName(String name) {
+		
+		List<ProductDb> dbData = productRepository.findProductsByName(name, new Timestamp((new Date()).getTime()));
+		List<Product> productList = ProductPopulator.populateProductListFromDB(dbData);
+		
+		return productList;
 	}
 	
 	
