@@ -3,6 +3,7 @@ package com.deadsec.ideal.populates;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.deadsec.ideal.model.data.PriceDetails;
 import com.deadsec.ideal.model.data.Product;
 import com.deadsec.ideal.model.db.ProductDb;
 
@@ -30,5 +31,22 @@ public class ProductPopulator {
 			}
 		}		
 		return productList;
+	}
+
+	public static Product populateProductDetails(ProductDb product, List<Object[]> priceList) {
+		List<PriceDetails> priceDetails = new ArrayList<PriceDetails>();
+		Product p = null;
+		if((priceList != null && !priceList.isEmpty()) 
+				&& product != null) {
+			for(Object[] entry : priceList) {
+				PriceDetails price = new PriceDetails();
+				price.setSize((String) entry[1]);
+				price.setPrice((float) entry[0]);
+				priceDetails.add(price);
+			}
+			p = new Product(product.getCode(), product.getProduct_name(),
+					product.getDescription(), product.getCas_number(), priceDetails);
+		}
+		return p;
 	}
 }

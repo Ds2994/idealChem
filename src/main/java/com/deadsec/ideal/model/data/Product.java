@@ -1,6 +1,7 @@
 package com.deadsec.ideal.model.data;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Product implements Serializable{
 
@@ -12,6 +13,8 @@ public class Product implements Serializable{
 	private String description;
 	private String casNumber;
 	
+	private List<PriceDetails> priceDetails;
+	
 	public Product() {
 		
 	}
@@ -22,6 +25,15 @@ public class Product implements Serializable{
 		this.productName = productName;
 		this.description = description;
 		this.casNumber = casNumber;
+	}
+
+	public Product(String code, String productName, String description, String casNumber, List<PriceDetails> details) {
+		super();
+		this.code = code;
+		this.productName = productName;
+		this.description = description;
+		this.casNumber = casNumber;
+		this.priceDetails = details;
 	}
 
 	public String getCode() {
@@ -54,5 +66,13 @@ public class Product implements Serializable{
 
 	public void setCasNumber(String casNumber) {
 		this.casNumber = casNumber;
+	}
+
+	public List<PriceDetails> getPriceDetails() {
+		return priceDetails;
+	}
+
+	public void setPriceDetails(List<PriceDetails> priceDetails) {
+		this.priceDetails = priceDetails;
 	}
 }

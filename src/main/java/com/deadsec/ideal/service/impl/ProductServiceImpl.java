@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.deadsec.ideal.model.data.Product;
 import com.deadsec.ideal.model.db.ProductDb;
 import com.deadsec.ideal.populates.ProductPopulator;
+import com.deadsec.ideal.repository.ProductPriceRepository;
 import com.deadsec.ideal.repository.ProductRepository;
 import com.deadsec.ideal.service.ProductService;
 
@@ -17,10 +18,12 @@ import com.deadsec.ideal.service.ProductService;
 public class ProductServiceImpl implements ProductService{
 
 	private ProductRepository productRepository;
+	private ProductPriceRepository productPriceRepository;
 	
 	@Autowired
-	public ProductServiceImpl(ProductRepository productRepository) {
+	public ProductServiceImpl(ProductRepository productRepository, ProductPriceRepository productPriceRepository) {
 		this.productRepository = productRepository;
+		this.productPriceRepository = productPriceRepository;
 	}
 
 	@Override
@@ -40,6 +43,15 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productList;
 	}
-	
-	
+
+	@Override
+	public Product getProductDetailsByCode(String code) {
+		
+		ProductDb product = productRepository.findProductByCode(code, new Timestamp((new Date()).getTime()));
+		List<Object[]> priceList = productPriceRepository.getPricePackListByProduct(code, "SRL");
+		
+		Product p = ProductPopulator.populateProductDetails(product, priceList);
+		
+		return p;
+	}
 }

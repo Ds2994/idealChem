@@ -13,7 +13,7 @@ import com.deadsec.ideal.model.data.Product;
 import com.deadsec.ideal.service.ProductService;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/v1/product")
 public class ProductController {
 
 	@Autowired
@@ -40,6 +40,17 @@ public class ProductController {
 			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok(products);
+		}
+	}
+	
+	@GetMapping("/details/{code}")
+	public ResponseEntity<Product> getProductDetails(@PathVariable("code") String code) {
+		Product product = productService.getProductDetailsByCode(code);
+		
+		if(product == null) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(product);
 		}
 	}
 }

@@ -9,4 +9,6 @@ public interface ProductService {
 	public Product getProductByCode(String code);
 	
 	public List<Product> getProductsByName(String name);
+	
+	public Product getProductDetailsByCode(String code);
 }
