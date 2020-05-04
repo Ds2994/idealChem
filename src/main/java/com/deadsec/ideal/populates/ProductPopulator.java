@@ -1,11 +1,14 @@
 package com.deadsec.ideal.populates;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.deadsec.ideal.model.data.PriceDetails;
 import com.deadsec.ideal.model.data.Product;
 import com.deadsec.ideal.model.db.ProductDb;
+import com.deadsec.ideal.model.db.ProductPrice;
 
 public class ProductPopulator {
 
@@ -20,6 +23,34 @@ public class ProductPopulator {
 		} else {
 			return null;
 		}
+	}
+	
+	public static ProductDb populateDbFromProduct(Product product) {
+		ProductDb data = new ProductDb();
+		
+		if(product != null) {
+			data.setCode(product.getCode());
+			data.setCas_number(product.getCasNumber());
+			data.setProduct_name(product.getProductName());
+			data.setDescription(product.getDescription());
+			data.setCreated_at(new Timestamp((new Date()).getTime()));
+			data.setUpdated_at(new Timestamp((new Date()).getTime()));
+			return data;
+		}
+		return null;
+	}
+	
+	public static ProductPrice populateDbFromPrice(int prod_id, int pack_id, int comp_id, float price) {
+		ProductPrice pp = new ProductPrice();
+		
+		pp.setProduct_id(prod_id);
+		pp.setPacking_id(pack_id);
+		pp.setCompany_id(comp_id);
+		pp.setPrice(price);
+		pp.setCreated_at(new Timestamp((new Date()).getTime()));
+		pp.setUpdated_at(new Timestamp((new Date()).getTime()));
+		
+		return pp;
 	}
 	
 	public static List<Product> populateProductListFromDB(List<ProductDb> data) {
