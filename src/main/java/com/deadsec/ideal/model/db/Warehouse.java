@@ -18,26 +18,26 @@ public class Warehouse {
 	
 	private String name;
 	private String address;
-	private Timestamp created_at;
-	private Timestamp updated_at;
-	private Timestamp deleted_at;
+	private Timestamp starttimestamp;
+	private Timestamp version;
+	private Timestamp endtimestamp;
 	
 	public Warehouse() {	
 	}
 
-	public Warehouse(String name, String address, Timestamp created_at) {
+	public Warehouse(String name, String address, Timestamp starttimestamp) {
 		super();
 		this.name = name;
 		this.address = address;
-		this.created_at = created_at;
+		this.starttimestamp = starttimestamp;
 	}
 
-	public Warehouse(int id, String name, String address, Timestamp created_at) {
+	public Warehouse(int id, String name, String address, Timestamp starttimestamp) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.created_at = created_at;
+		this.starttimestamp = starttimestamp;
 	}
 
 	public int getId() {
@@ -64,27 +64,27 @@ public class Warehouse {
 		this.address = address;
 	}
 
-	public Timestamp getCreated_at() {
-		return created_at;
+	public Timestamp getStarttimestamp() {
+		return starttimestamp;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setStarttimestamp(Timestamp starttimestamp) {
+		this.starttimestamp = starttimestamp;
 	}
 
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public Timestamp getVersion() {
+		return version;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setVersion(Timestamp version) {
+		this.version = version;
 	}
 
-	public Timestamp getDeleted_at() {
-		return deleted_at;
+	public Timestamp getEndtimestamp() {
+		return endtimestamp;
 	}
 
-	public void setDeleted_at(Timestamp deleted_at) {
-		this.deleted_at = deleted_at;
-	}	
+	public void setEndtimestamp(Timestamp endtimestamp) {
+		this.endtimestamp = endtimestamp;
+	}
 }

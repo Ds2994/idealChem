@@ -18,6 +18,11 @@ public interface ProductRepository extends JpaRepository<ProductDb, Integer>{
 	nativeQuery = true)
 	ProductDb findProductByCode(@Param("code") String code, @Param("timestamp") Timestamp timestamp);
 	
+	//Fetching Product Name by Code
+	@Query(value = "SELECT p.product_name FROM product p WHERE p.code = :code",
+	nativeQuery = true)
+	String findNameByCode(@Param("code") String code);
+	
 	//Fetching List of Products by Name
 	@Query(value = "SELECT * FROM product p WHERE p.product_name LIKE %:name% AND p.created_at <= :timestamp",
 	nativeQuery = true)

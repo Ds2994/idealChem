@@ -16,31 +16,31 @@ public class Stock {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private int productPrice_id;
+	private int product_price_id;
 	private int warehouse_id;
 	private int quantity;
-	private Timestamp created_at;
-	private Timestamp updated_at;
-	private Timestamp deleted_at;
+	private Timestamp starttimestamp;
+	private Timestamp version;
+	private Timestamp endtimestamp;
 	
 	public Stock() {
 	}
 
-	public Stock(int productPrice_id, int warehouse_id, int quantity, Timestamp created_at) {
+	public Stock(int product_price_id, int warehouse_id, int quantity, Timestamp starttimestamp) {
 		super();
-		this.productPrice_id = productPrice_id;
+		this.product_price_id = product_price_id;
 		this.warehouse_id = warehouse_id;
 		this.quantity = quantity;
-		this.created_at = created_at;
+		this.starttimestamp = starttimestamp;
 	}
 
-	public Stock(int id, int productPrice_id, int warehouse_id, int quantity, Timestamp created_at) {
+	public Stock(int id, int productPrice_id, int warehouse_id, int quantity, Timestamp starttimestamp) {
 		super();
 		this.id = id;
-		this.productPrice_id = productPrice_id;
+		this.product_price_id = productPrice_id;
 		this.warehouse_id = warehouse_id;
 		this.quantity = quantity;
-		this.created_at = created_at;
+		this.starttimestamp = starttimestamp;
 	}
 
 	public int getId() {
@@ -52,11 +52,11 @@ public class Stock {
 	}
 
 	public int getProductPrice_id() {
-		return productPrice_id;
+		return product_price_id;
 	}
 
 	public void setProductPrice_id(int productPrice_id) {
-		this.productPrice_id = productPrice_id;
+		this.product_price_id = productPrice_id;
 	}
 
 	public int getWarehouse_id() {
@@ -75,27 +75,27 @@ public class Stock {
 		this.quantity = quantity;
 	}
 
-	public Timestamp getCreated_at() {
-		return created_at;
+	public Timestamp getStarttimestamp() {
+		return starttimestamp;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
-		this.created_at = created_at;
+	public void setStarttimestamp(Timestamp starttimestamp) {
+		this.starttimestamp = starttimestamp;
 	}
 
-	public Timestamp getUpdated_at() {
-		return updated_at;
+	public Timestamp getVersion() {
+		return version;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
-		this.updated_at = updated_at;
+	public void setVersion(Timestamp version) {
+		this.version = version;
 	}
 
-	public Timestamp getDeleted_at() {
-		return deleted_at;
+	public Timestamp getEndtimestamp() {
+		return endtimestamp;
 	}
 
-	public void setDeleted_at(Timestamp deleted_at) {
-		this.deleted_at = deleted_at;
+	public void setEndtimestamp(Timestamp endtimestamp) {
+		this.endtimestamp = endtimestamp;
 	}
 }
