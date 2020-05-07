@@ -1,5 +1,8 @@
 package com.deadsec.ideal.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +42,26 @@ public class StockServiceImpl implements StockService{
 			return null;
 		}
 		return jsonResponse;
+	}
+
+	@Override
+	public List<StockJSON> getStockForWarehouse(int id) {
+		List<StockJSON> stockList = new ArrayList<StockJSON>();
+		try {
+			List<Object[]> dbData = stockRepository.getPPIdquantityList(id);
+			if(null != dbData && !dbData.isEmpty()){
+				for(Object[] entry : dbData) {
+					String size = productPriceRepository.findPackSizeByPPId((int) entry[0]);
+					String name = productPriceRepository.findProductNameById((int) entry[0]);
+					String code = productPriceRepository.findCodeById((int) entry[0]);
+					StockJSON stock = new StockJSON(code, name, size,(int) entry[1]);
+					stockList.add(stock);
+				}
+			}
+		} catch(Exception ex) {
+			return null;
+		}
+		return stockList;
 	}
 
 }

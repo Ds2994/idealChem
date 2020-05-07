@@ -12,6 +12,32 @@ import com.deadsec.ideal.model.db.ProductPrice;
 @Repository
 public interface ProductPriceRepository extends JpaRepository<ProductPrice, Integer>{
 
+	//Fetch Product Id by Id(Primary Key)
+	@Query(value = "SELECT pp.product_id FROM productprice pp where pp.id = :id",
+	nativeQuery = true)
+	String findProductIdById(@Param("id") int id);
+		
+	//Fetch Packing_size Id by Id(Primary Key)
+	@Query(value = "SELECT pk.packing_size FROM productprice pp "
+			+ "JOIN packing pk ON pk.id = pp.packing_id "
+			+ "WHERE pp.id = :id",
+	nativeQuery = true)
+	String findPackSizeByPPId(@Param("id") int id);
+	
+	//Fetch ProductName by Id(Primary Key)
+	@Query(value = "SELECT p.product_name FROM productprice pp "
+			+ "JOIN product p ON p.id = pp.product_id "
+			+ "WHERE pp.id = :id",
+	nativeQuery = true)
+	String findProductNameById(@Param("id") int id);
+	
+	//Fetch Product Code by Id(Primary Key)
+	@Query(value = "SELECT p.code FROM productprice pp "
+			+ "JOIN product p ON p.id = pp.product_id "
+			+ "WHERE pp.id = :id",
+	nativeQuery = true)
+	String findCodeById(@Param("id") int id);
+		
 	@Query(value = "SELECT pp.price, pk.packing_size FROM productprice pp "
 			+ "JOIN product p ON p.id = pp.product_id "
 			+ "JOIN packing pk ON pk.id = pp.packing_id "

@@ -1,8 +1,12 @@
 package com.deadsec.ideal.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +33,18 @@ public class StockController {
 		} else {
 			return ResponseEntity.ok(jsonResponse);
 		}
+	}
+	
+	@GetMapping("/warehouse/{id}")
+	public ResponseEntity<List<StockJSON>> getStockAtWarehouse(@PathVariable("id") int id) {
+		List<StockJSON> response = new ArrayList<StockJSON>();
 		
+		response = stockService.getStockForWarehouse(id);
+		
+		if(response == null || response.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(response);
+		}
 	}
 }
