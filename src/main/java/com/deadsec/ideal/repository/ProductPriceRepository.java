@@ -38,7 +38,7 @@ public interface ProductPriceRepository extends JpaRepository<ProductPrice, Inte
 	nativeQuery = true)
 	String findCodeById(@Param("id") int id);
 		
-	@Query(value = "SELECT pp.price, pk.packing_size FROM productprice pp "
+	@Query(value = "SELECT pp.id, pp.price, pk.packing_size FROM productprice pp "
 			+ "JOIN product p ON p.id = pp.product_id "
 			+ "JOIN packing pk ON pk.id = pp.packing_id "
 			+ "JOIN company c ON c.id = pp.company_id "

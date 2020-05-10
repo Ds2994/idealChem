@@ -11,15 +11,17 @@ public class PriceDetails implements Serializable{
 
 	private String size;
 	private float price;
+	private int quantity;
 	
 	public PriceDetails() {
 		
 	}
 
-	public PriceDetails(String size, float price) {
+	public PriceDetails(String size, float price, int quantity) {
 		super();
 		this.size = size;
 		this.price = price;
+		this.quantity = quantity;
 	}
 
 	public String getSize() {
@@ -36,5 +38,13 @@ public class PriceDetails implements Serializable{
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }

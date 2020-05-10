@@ -1,12 +1,15 @@
 package com.deadsec.ideal.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deadsec.ideal.model.data.StockJSON;
+import com.deadsec.ideal.model.db.Stock;
 import com.deadsec.ideal.populates.StockPopulator;
 import com.deadsec.ideal.repository.ProductPriceRepository;
 import com.deadsec.ideal.repository.ProductRepository;
@@ -35,8 +38,8 @@ public class StockServiceImpl implements StockService{
 			int id = productPriceRepository.getProductPriceIdByProduct(code, packingSize, "SRL");
 			String productName = productRepository.findNameByCode(code);
 			if(0 != id) {
-				int quantity = stockRepository.getStocksForProduct(id);
-				jsonResponse = StockPopulator.populateStockJSONFromDb(code, productName, packingSize, quantity);
+				Stock stock = stockRepository.getStocksForProduct(id, new Timestamp((new Date()).getTime()));
+				jsonResponse = StockPopulator.populateStockJSONFromDb(code, productName, packingSize, stock.getQuantity());
 			}
 		} catch(Exception ex) {
 			return null;

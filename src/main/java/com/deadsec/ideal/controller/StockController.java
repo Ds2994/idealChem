@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,13 +40,15 @@ public class StockController {
 	@GetMapping("/warehouse/{id}")
 	public ResponseEntity<List<StockJSON>> getStockAtWarehouse(@PathVariable("id") int id) {
 		List<StockJSON> response = new ArrayList<StockJSON>();
-		
+		HttpHeaders headers = new HttpHeaders();
+	    headers.add("Access-Control-Allow-Origin", "*");
+	    
 		response = stockService.getStockForWarehouse(id);
 		
 		if(response == null || response.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		} else {
-			return ResponseEntity.ok(response);
+			return (new ResponseEntity<List<StockJSON>>(response, headers, HttpStatus.OK));
 		}
 	}
 }

@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.deadsec.ideal.model.data.PriceDetails;
 import com.deadsec.ideal.model.data.Product;
 import com.deadsec.ideal.model.db.ProductDb;
 import com.deadsec.ideal.model.db.ProductPrice;
+import com.deadsec.ideal.model.db.Stock;
+import com.deadsec.ideal.repository.StockRepository;
 
 public class ProductPopulator {
 
@@ -64,16 +68,19 @@ public class ProductPopulator {
 		return productList;
 	}
 
-	public static Product populateProductDetails(ProductDb product, List<Object[]> priceList) {
+	public static Product populateProductDetails(ProductDb product, List<Object[]> priceList, List<Integer> quantity) {
 		List<PriceDetails> priceDetails = new ArrayList<PriceDetails>();
 		Product p = null;
 		if((priceList != null && !priceList.isEmpty()) 
 				&& product != null) {
+			int i=0;
 			for(Object[] entry : priceList) {
 				PriceDetails price = new PriceDetails();
-				price.setSize((String) entry[1]);
-				price.setPrice((float) entry[0]);
+				price.setQuantity(quantity.get(i));
+				price.setSize((String) entry[2]);
+				price.setPrice((float) entry[1]);
 				priceDetails.add(price);
+				i++;
 			}
 			p = new Product(product.getCode(), product.getProduct_name(),
 					product.getDescription(), product.getCas_number(), priceDetails);
