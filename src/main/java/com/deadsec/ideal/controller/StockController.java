@@ -40,15 +40,13 @@ public class StockController {
 	@GetMapping("/warehouse/{id}")
 	public ResponseEntity<List<StockJSON>> getStockAtWarehouse(@PathVariable("id") int id) {
 		List<StockJSON> response = new ArrayList<StockJSON>();
-		HttpHeaders headers = new HttpHeaders();
-	    headers.add("Access-Control-Allow-Origin", "*");
 	    
 		response = stockService.getStockForWarehouse(id);
 		
 		if(response == null || response.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		} else {
-			return (new ResponseEntity<List<StockJSON>>(response, headers, HttpStatus.OK));
+			return ResponseEntity.ok(response);
 		}
 	}
 }
