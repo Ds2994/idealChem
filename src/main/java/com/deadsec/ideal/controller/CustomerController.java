@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +31,19 @@ public class CustomerController {
 		response = customerService.getCustomersByName(name);
 		
 		if(response == null || response.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(response);
+		}
+	}
+	
+	@PostMapping("/")
+	public ResponseEntity<CustomerJSON> createCustomer(@RequestBody CustomerJSON customer) {
+		CustomerJSON response = null;
+		
+		response = customerService.saveCustomer(customer);
+		
+		if(response == null) {
 			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok(response);

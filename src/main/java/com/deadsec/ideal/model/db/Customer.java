@@ -1,5 +1,7 @@
 package com.deadsec.ideal.model.db;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
@@ -20,7 +22,7 @@ public class Customer {
 	private String institute;
 	private Timestamp starttimestamp;
 	private Timestamp version;
-	private Timestamp endtimestamp;
+	private Timestamp endtimestamp = java.sql.Timestamp.valueOf("9999-12-31 23:59:59");
 	
 	public Customer() {
 	}

@@ -37,4 +37,17 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;
 	}
 
+
+	@Override
+	public CustomerJSON saveCustomer(CustomerJSON customer) {
+		Customer data = CustomerPopulator.populateDBFromCustomerJSON(customer);
+		
+		try {
+			customer = CustomerPopulator.populateCustomerJSONFromDB(customerRepository.save(data));
+			return customer;
+		}catch(Exception e) {
+			return null;
+		}
+	}
+
 }
