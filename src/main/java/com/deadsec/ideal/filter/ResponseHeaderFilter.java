@@ -11,9 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
-//@Controller
+@Component
 public class ResponseHeaderFilter implements Filter{
 
 	@Override
@@ -22,7 +22,7 @@ public class ResponseHeaderFilter implements Filter{
 		HttpServletResponse response = (HttpServletResponse) res;
 		//HttpServletRequest request = (HttpServletRequest) req;
         response.setHeader("Access-Control-Allow-Origin", "*");
-        chain.doFilter(req, res);	
+        chain.doFilter(req, response);	
 	}
 	
 	@Override
