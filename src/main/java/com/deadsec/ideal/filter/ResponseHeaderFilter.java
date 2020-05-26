@@ -22,6 +22,7 @@ public class ResponseHeaderFilter implements Filter{
 		HttpServletResponse response = (HttpServletResponse) res;
 		//HttpServletRequest request = (HttpServletRequest) req;
         response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         chain.doFilter(req, response);	
 	}
 	
