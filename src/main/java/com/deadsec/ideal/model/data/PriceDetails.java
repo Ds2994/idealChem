@@ -9,16 +9,18 @@ public class PriceDetails implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String size;
+	private int id;
 	private float price;
+	private String size;
 	private int quantity;
 	
 	public PriceDetails() {
 		
 	}
 
-	public PriceDetails(String size, float price, int quantity) {
+	public PriceDetails(int id, String size, float price, int quantity) {
 		super();
+		this.id = id;
 		this.size = size;
 		this.price = price;
 		this.quantity = quantity;
@@ -46,5 +48,13 @@ public class PriceDetails implements Serializable{
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

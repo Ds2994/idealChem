@@ -56,6 +56,17 @@ public class ProductController {
 		}
 	}
 	
+	@GetMapping("/details/name/{name}")
+	public ResponseEntity<List<Product>> getProductDetailsByName(@PathVariable("name") String name) {
+		List<Product> products = productService.getProductDetailsByName(name);
+		
+		if(products == null) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(products);
+		}
+	}
+	
 	@PostMapping("/details")
 	public ResponseEntity<Product> createProduct(@RequestBody Product product) {
 		boolean result = productService.createProduct(product);

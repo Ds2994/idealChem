@@ -10,6 +10,8 @@ public interface ProductService {
 	
 	public List<Product> getProductsByName(String name);
 	
+	public List<Product> getProductDetailsByName(String name);
+	
 	public Product getProductDetailsByCode(String code);
 	
 	public boolean createProduct(Product product);

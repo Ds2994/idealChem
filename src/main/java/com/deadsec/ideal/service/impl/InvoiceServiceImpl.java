@@ -1,5 +1,6 @@
 package com.deadsec.ideal.service.impl;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,25 @@ public class InvoiceServiceImpl implements InvoiceService{
 		List<InvoiceJSON> invoices = new ArrayList<InvoiceJSON>();
 		try {
 			List<Object[]> dbData = invoiceRepository.getLatestInvoices();
+			
+			if(dbData != null && !dbData.isEmpty()) {
+				for(Object[] entry : dbData) {
+					InvoiceJSON invoice = InvoicePopulator.populateInvoiceJSONfromData(entry);
+					invoices.add(invoice);
+				}
+				return invoices;
+			}
+		}catch(Exception e) {
+			return null;
+		}		
+		return null;
+	}
+
+	@Override
+	public List<InvoiceJSON> getInvocesByDate(Date begin, Date end) {
+		List<InvoiceJSON> invoices = new ArrayList<InvoiceJSON>();
+		try {
+			List<Object[]> dbData = invoiceRepository.getLatestInvoicesByDate(new java.sql.Date(begin.getTime()), new java.sql.Date(end.getTime()));
 			
 			if(dbData != null && !dbData.isEmpty()) {
 				for(Object[] entry : dbData) {

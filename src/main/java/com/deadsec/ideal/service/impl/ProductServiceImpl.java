@@ -53,6 +53,43 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productList;
 	}
+	
+	public List<Product> getProductDetailsByName(String name) {
+		List<Product> products = new ArrayList<Product>();
+		try {
+			List<ProductDb> productList = productRepository.findProductsByName(name, new Timestamp((new Date()).getTime()));
+			
+			for(ProductDb product: productList){
+				Product p = new Product(product.getCode(), product.getProduct_name(), product.getDescription(), product.getCas_number());
+				List<Object[]> companyNameList = productPriceRepository.getCompanyNameByProductId(product.getId());
+				
+				for(Object[] company: companyNameList) {
+					p.setComapanyName((String) company[1]);
+					List<Object[]> priceList = productPriceRepository.getPricePackListByProductCompany(product.getId(), (int) company[0]);
+					
+					List<PriceDetails> detailsList = new ArrayList<PriceDetails>();
+					for(Object[] data : priceList){
+						Stock stock = stockRepository.getStocksForProduct((Integer) data[0], new Timestamp((new Date()).getTime()));
+						if(null != stock) {
+							PriceDetails details = new PriceDetails((Integer) data[0], (String) data[2], (float) data[1], stock.getQuantity());
+							detailsList.add(details);
+						}else {
+							PriceDetails details = new PriceDetails((Integer) data[0], (String) data[2], (float) data[1], 0);
+							detailsList.add(details);
+						}
+						
+					}
+					//Add details list to Product Object
+					p.setPriceDetails(detailsList);
+					//Add Product List for each Company
+					products.add(p);
+				}
+			}
+		}catch(Exception e) {
+			return null;
+		}
+		return products;
+	}
 
 	@Override
 	public Product getProductDetailsByCode(String code) {

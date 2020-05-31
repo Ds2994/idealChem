@@ -12,6 +12,7 @@ public class Product implements Serializable{
 	private String productName;
 	private String description;
 	private String casNumber;
+	private String comapanyName;
 	
 	private List<PriceDetails> priceDetails;
 	
@@ -74,5 +75,13 @@ public class Product implements Serializable{
 
 	public void setPriceDetails(List<PriceDetails> priceDetails) {
 		this.priceDetails = priceDetails;
+	}
+
+	public String getComapanyName() {
+		return comapanyName;
+	}
+
+	public void setComapanyName(String comapanyName) {
+		this.comapanyName = comapanyName;
 	}
 }
