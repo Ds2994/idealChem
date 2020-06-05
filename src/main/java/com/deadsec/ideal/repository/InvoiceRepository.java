@@ -31,4 +31,9 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer>{
 			+"ORDER BY create_date DESC ",
 	nativeQuery = true)
 	public List<Object[]> getLatestInvoicesByDate(@Param("begin") Date begin, @Param("end") Date end);
+	
+	//Fetch the latest invoice reference number 
+	@Query(value = "SELECT inv.reference FROM ideal.invoice inv ORDER BY create_date DESC LIMIT 1",
+	nativeQuery = true)
+	public String getLatestInvoiceReference();
 }

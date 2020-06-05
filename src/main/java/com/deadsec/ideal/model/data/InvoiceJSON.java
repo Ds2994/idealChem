@@ -10,6 +10,7 @@ public class InvoiceJSON {
 	private Date createDate;
 	private float amount;
 	private String state;
+	private int customerId;
 	
 	public InvoiceJSON() {
 	}
@@ -22,6 +23,7 @@ public class InvoiceJSON {
 		this.createDate = createDate;
 		this.amount = amount;
 		this.state = state;
+		
 	}
 
 	public int getId() {
@@ -70,5 +72,13 @@ public class InvoiceJSON {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 }

@@ -10,4 +10,6 @@ public interface InvoiceService {
 	List<InvoiceJSON> getInvoices();
 	
 	List<InvoiceJSON> getInvocesByDate(Date begin, Date end);
+
+	InvoiceJSON createInvoice(InvoiceJSON invoice);
 }
